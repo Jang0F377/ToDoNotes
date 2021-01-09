@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+    tools:context=".registerlogin.RegistrationActivity">
+
+    <TextView
+        android:id="@+id/tvHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="The Way To-Do-Manager"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:ems="15"
+        android:textColor="@color/pirate_gold"
+        android:gravity="center"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:padding="2dp"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Enter A Username.."
+        app:hintTextColor="@color/pirate_gold"
+        android:background="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvHeader"
+        app:hintTextAppearance="@style/HintText"
+        android:layout_marginTop="18dp"
+        android:padding="2dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etUsername"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPersonName"
+            android:ems="15"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Enter Your Email.."
+        app:hintTextColor="@color/pirate_gold"
+        android:background="@color/white"
+        app:layout_constraintStart_toStartOf="@id/textInputLayoutUsername"
+        app:layout_constraintEnd_toEndOf="@id/textInputLayoutUsername"
+        app:layout_constraintTop_toBottomOf="@id/textInputLayoutUsername"
+        app:hintTextAppearance="@style/HintText"
+        android:layout_marginTop="20dp"
+        android:padding="2dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textEmailAddress"
+            android:ems="15"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="wrap_content"
+        android:id="@+id/textInputLayoutPassword"
+        android:layout_height="wrap_content"
+        android:hint="Enter A Password.."
+        app:hintTextColor="@color/pirate_gold"
+        android:background="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/passwordGuideline"
+        app:hintTextAppearance="@style/HintText"
+        android:layout_marginTop="1dp"
+        app:passwordToggleEnabled="true"
+        android:padding="2dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPassword"
+            android:ems="15"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/passwordGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.61"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="wrap_content"
+        android:id="@+id/textInputLayoutConfirmPassword"
+        android:layout_height="wrap_content"
+        android:hint="Confirm Password.."
+        app:hintTextColor="@color/pirate_gold"
+        android:background="@color/white"
+        app:layout_constraintStart_toStartOf="@id/textInputLayoutPassword"
+        app:layout_constraintEnd_toEndOf="@id/textInputLayoutPassword"
+        app:layout_constraintTop_toBottomOf="@id/textInputLayoutPassword"
+        app:hintTextAppearance="@style/HintText"
+        android:layout_marginTop="20dp"
+        app:passwordToggleEnabled="true"
+        android:padding="2dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etConfirmPassword"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPassword"
+            android:ems="15"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/tvAlreadyHaveAccount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/already_have_an_account"
+        app:layout_constraintTop_toBottomOf="@id/textInputLayoutConfirmPassword"
+        android:padding="2dp"
+        android:textColor="@color/pirate_gold"
+        android:gravity="center"
+        android:layout_marginTop="18dp"/>
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvAlreadyHaveAccount"
+        app:layout_constraintRight_toRightOf="@id/textInputLayoutConfirmPassword"
+        android:text="@string/register"
+        android:layout_marginBottom="20dp"
+        android:padding="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvAlreadyHaveAccount"
+        app:layout_constraintRight_toLeftOf="@id/btnRegister"
+        app:layout_constraintLeft_toLeftOf="@id/tvAlreadyHaveAccount"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="20dp"
+        android:visibility="gone"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

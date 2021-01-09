@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ToDoNotes</string>
+    <string name="register">I\'m Ready, This is the way.</string>
+    <string name="already_have_an_account">Returning User? This way to log in!!</string>
+    <string name="need_to_create_an_account">New User? This is the Way!!</string>
+    <string name="btn_login">Login</string>
+</resources>

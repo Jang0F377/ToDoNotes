@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "261863031845",
+    "project_id": "todonotes-fdeb2",
+    "storage_bucket": "todonotes-fdeb2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:261863031845:android:7e373ebc67e764d5b82bcc",
+        "android_client_info": {
+          "package_name": "com.mattgarrett.todonotes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "261863031845-mbg5u2en2nkif6u6r43mckcnj06vfnd4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDL_xepfjSM9MMBWx7MYhPITli0y0nIX1k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "261863031845-mbg5u2en2nkif6u6r43mckcnj06vfnd4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

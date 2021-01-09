@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="HintText">
+        <item name="android:textSize">9sp</item>
+        <item name="android:textColor">@color/pirate_gold</item>
+
+    </style>
+
+
+</resources>
