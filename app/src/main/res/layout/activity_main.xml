@@ -52,27 +52,49 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
+    <TextView
+        android:id="@+id/tvTodayIs"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Today is: "
+        android:gravity="start"
+        android:textSize="30sp"
+        android:padding="4dp"
+        android:textColor="@color/pirate_gold"
         android:background="@color/midnight_black"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/tvDayOfWeek"
+        app:layout_constraintTop_toTopOf="@id/tvDayOfWeek" />
+
+    <TextView
+        android:id="@+id/tvDayOfWeek"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text = "Monday "
+        android:gravity="end"
+        android:background="@color/midnight_black"
+        android:textColor="@color/pirate_gold"
+        app:layout_constraintLeft_toRightOf="@id/tvTodayIs"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvWhatDoYouHaveToDoToday" />
+        app:layout_constraintTop_toBottomOf="@id/tvWhatDoYouHaveToDoToday"
+        app:layout_constraintBottom_toTopOf="@id/rvActivityMain"
+        android:padding="4dp"
+        android:textSize="30sp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvActivityMain"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/divider"
+        app:layout_constraintTop_toBottomOf="@id/tvTodayIs"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="6dp"
         android:layout_marginStart="3dp"
         android:layout_marginEnd="3dp"
-        android:background="@color/energy_silver"/>
+        android:layout_marginTop="2dp"
+        android:background="@color/energy_silver"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
 
 

@@ -8,21 +8,25 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.mattgarrett.todonotes.adapters.ToDoItemAdapter
 import com.mattgarrett.todonotes.databinding.ActivityMainBinding
 import com.mattgarrett.todonotes.registerlogin.LoginActivity
 import com.mattgarrett.todonotes.registerlogin.RegistrationActivity
+import com.mattgarrett.todonotes.viewmodels.MainViewModel
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var binding: ActivityMainBinding
+    private lateinit var viewModel: MainViewModel
 
 
     companion object{
-        val TAG = "MainActivity"
+        const val TAG = "MainActivity"
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -32,8 +36,13 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.title = "Today's Notes"
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         checkLoggedInState()
         setDate()
+
+        val adapter = ToDoItemAdapter(viewModel.dummyData)
+        binding.rvActivityMain.adapter = adapter
+
 
 
 
@@ -46,10 +55,12 @@ class MainActivity : AppCompatActivity() {
         val month: Int = cal.get(Calendar.MONTH)
         val monthString = checkMonth(month)
         val date = cal.get(Calendar.DATE)
+        val dayOfWeek = cal.get(Calendar.DAY_OF_WEEK)
+        val getDay = checkDayOfWeek(dayOfWeek)
         binding.tvMonth.text = monthString
         binding.tvDate.text = date.toString()
+        binding.tvDayOfWeek.text = getDay
     }
-
     private fun checkMonth(month: Int): String =
         when (month) {
             0 -> "January"
@@ -66,8 +77,17 @@ class MainActivity : AppCompatActivity() {
             11 -> "December"
             else -> "ERROR"
         }
-
-
+    private fun checkDayOfWeek(day: Int): String =
+            when (day) {
+                1 -> "Sunday "
+                2 -> "Monday "
+                3 -> "Tuesday "
+                4 -> "Wednesday "
+                5 -> "Thursday "
+                6 -> "Friday "
+                7 -> "Saturday "
+                else -> day.toString()
+            }
     private fun checkLoggedInState() {
         auth = Firebase.auth
         if (auth.currentUser == null){
@@ -83,7 +103,6 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.nav_menu,menu)
         return super.onCreateOptionsMenu(menu)
     }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menuNewItem -> {

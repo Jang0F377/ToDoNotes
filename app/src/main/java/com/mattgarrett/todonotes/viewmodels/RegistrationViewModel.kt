@@ -12,7 +12,7 @@ import java.lang.Error
 
 class RegistrationViewModel :  ViewModel() {
     companion object {
-        val TAG = "RegVMActivity"
+        const val TAG = "RegVMActivity"
     }
 
     lateinit var auth: FirebaseAuth

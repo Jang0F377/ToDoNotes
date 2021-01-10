@@ -8,6 +8,10 @@ import java.util.*
 class NewToDoItemActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNewToDoItemBinding
 
+    companion object {
+        const val TAG = "NewItemActivity"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityNewToDoItemBinding.inflate(layoutInflater)
