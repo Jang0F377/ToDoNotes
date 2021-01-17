@@ -24,7 +24,7 @@ class RegistrationViewModel :  ViewModel() {
         auth = Firebase.auth
         CoroutineScope(Dispatchers.IO).launch {
             _loginUiState.value = LoginUiState.Loading
-            delay(2000L)
+            delay(2500L)
             try {
                 auth.createUserWithEmailAndPassword(email,password)
                     .addOnCompleteListener {
@@ -35,7 +35,6 @@ class RegistrationViewModel :  ViewModel() {
                         }
 
                     }
-                Log.d(TAG,"Executing Registration in Thread ${Thread.currentThread().name}")
 
             } catch (e: Exception) {
                 _loginUiState.value = LoginUiState.Error("${e.message}")
@@ -48,6 +47,8 @@ class RegistrationViewModel :  ViewModel() {
     fun loginUser(email: String,password: String) {
         auth = Firebase.auth
         CoroutineScope(Dispatchers.IO).launch {
+            _loginUiState.value = LoginUiState.Loading
+            delay(2500L)
             try {
                 auth.signInWithEmailAndPassword(email,password)
                     .addOnCompleteListener {

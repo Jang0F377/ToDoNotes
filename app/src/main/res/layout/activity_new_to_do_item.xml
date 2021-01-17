@@ -4,7 +4,157 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#DDD7D7"
+    android:background="@color/rockies_purple"
+    android:padding="2dp"
     tools:context=".NewToDoItemActivity">
+
+    <ImageView
+        android:id="@+id/ivMandoPic"
+        android:src="@drawable/ic_this_is_the_way"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="6dp"
+        android:padding="6dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/black"/>
+
+    <TextView
+        android:id="@+id/tvNew"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/ivMandoPic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="New"
+        android:layout_marginTop="2dp"
+        android:textStyle="bold"
+        android:fontFamily="serif-monospace"
+        android:textColor="@color/yellow"
+        android:textSize="33sp"
+        android:gravity="center"/>
+    <TextView
+        android:id="@+id/tvTodoItem"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="To-Do Item"
+        android:textColor="@color/yellow"
+        android:gravity="center"
+        android:textSize="33sp"
+        android:fontFamily="serif-monospace"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/tvNew"
+        app:layout_constraintBottom_toTopOf="@id/guideline1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintGuide_percent="0.43"
+        android:orientation="horizontal"/>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Title"
+        android:background="@color/white"
+        app:hintTextAppearance="@style/HintText"
+        app:layout_constraintTop_toTopOf="@id/guideline1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="4dp"
+        android:layout_marginTop="12dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etTitle"
+            android:inputType="textShortMessage|textCapSentences"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ems="15"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tilTitle"
+        app:layout_constraintStart_toStartOf="@id/tilTitle"
+        app:layout_constraintEnd_toEndOf="@id/tilTitle"
+        app:hintTextAppearance="@style/HintText"
+        android:layout_marginTop="18dp"
+        android:padding="4dp"
+        android:background="@color/white"
+        android:hint="Item Description..">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine|textCapSentences|textAutoCorrect"
+            android:ems="15"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/tvSelectDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tilDescription"
+        app:layout_constraintStart_toStartOf="@id/tilDescription"
+        app:layout_constraintEnd_toEndOf="@id/tilDescription"
+        android:text="Select Date:"
+        android:fontFamily="serif-monospace"
+        android:gravity="center"
+        android:layout_marginTop="6dp"
+        android:textSize="24sp"
+        android:textColor="@color/yellow"/>
+    <NumberPicker
+        android:id="@+id/numPickerMonth"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/tvSelectDate"
+        app:layout_constraintStart_toStartOf="@id/tilDescription"
+        app:layout_constraintEnd_toStartOf="@id/numPickerDay"
+        app:layout_constraintBottom_toTopOf="@id/btnCreateNewItem"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="18dp"
+        android:background="@color/white"/>
+    <NumberPicker
+        android:id="@+id/numPickerDay"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/tvSelectDate"
+        app:layout_constraintEnd_toEndOf="@id/tilDescription"
+        android:layout_marginTop="6dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="18dp"
+        android:background="@color/white"
+        app:layout_constraintStart_toEndOf="@id/numPickerMonth"
+        app:layout_constraintBottom_toTopOf="@id/btnCreateNewItem" />
+
+    <Button
+        android:id="@+id/btnCreateNewItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/numPickerMonth"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="24dp"
+        android:text="Post New Item"
+        android:textSize="15sp"/>
+
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

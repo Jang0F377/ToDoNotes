@@ -4,6 +4,7 @@ data class ToDoItem(
         val toDoTitle: String? = "",
         val toDoDescription: String? = "",
         val date: String? = "",
-        val isFinished: Boolean = false
-
+        val isFinished: Boolean = false,
+        val timestamp: Long = 0L,
+        val numberId: Int = -1
 )
