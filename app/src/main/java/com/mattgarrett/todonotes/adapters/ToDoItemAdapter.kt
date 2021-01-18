@@ -22,12 +22,12 @@ class ToDoItemAdapter : RecyclerView.Adapter<ToDoItemAdapter.ToDoViewHolder>() {
 
     private val diffCallback = object : DiffUtil.ItemCallback<ToDoItem>(){
         override fun areItemsTheSame(oldItem: ToDoItem, newItem: ToDoItem): Boolean {
-            return oldItem.toDoDescription == newItem.toDoDescription
+            return oldItem.timestamp == newItem.timestamp
 
         }
 
         override fun areContentsTheSame(oldItem: ToDoItem, newItem: ToDoItem): Boolean {
-            return oldItem.hashCode() == newItem.hashCode()
+            return oldItem.timestamp == newItem.timestamp
         }
     }
 

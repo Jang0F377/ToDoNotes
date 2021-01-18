@@ -20,7 +20,7 @@ import com.mattgarrett.todonotes.adapters.ToDoItemAdapter
 import com.mattgarrett.todonotes.data.ToDoItem
 import com.mattgarrett.todonotes.databinding.ActivityMainBinding
 import com.mattgarrett.todonotes.registerlogin.LoginActivity
-import com.mattgarrett.todonotes.viewmodels.MainViewModel
+import com.mattgarrett.todonotes.viewmodels.MainViewModel2
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -31,10 +31,9 @@ import kotlin.collections.HashMap
 class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var binding: ActivityMainBinding
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: MainViewModel2
     private lateinit var todoItemAdapter: ToDoItemAdapter
-    private lateinit var database: FirebaseDatabase
-    private lateinit var calendar: Calendar
+
 
 
 
@@ -49,15 +48,15 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.title = "Today's List"
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(MainViewModel2::class.java)
         checkLoggedInState()
         viewModel.getCurrentDate().apply {
             binding.tvMonth.text = viewModel.monthString
-            binding.tvDate.text = viewModel.date
-            binding.tvDayOfWeek.text = viewModel.dayString
+            binding.tvDate.text = viewModel.date.toString()
+            binding.tvDayOfWeek.text = viewModel.dayOfWeek
         }
         setupRecyclerView()
-        CoroutineScope(Dispatchers.IO).launch { getItemsFromFirebase() }
+        CoroutineScope(Dispatchers.Default).launch { viewModel.getItemsFromFirebase(todoItemAdapter) }
 
 
 
@@ -72,55 +71,6 @@ class MainActivity : AppCompatActivity() {
         adapter = todoItemAdapter
         addItemDecoration(DividerItemDecoration(this@MainActivity, DividerItemDecoration.VERTICAL))
     }
-
-    fun getItemsFromFirebase() {
-        database = Firebase.database
-        calendar = Calendar.getInstance()
-        val month = calendar.get(Calendar.MONTH) + 1
-        val date = calendar.get(Calendar.DATE)
-        val dateFormat = "ITEMS/${month}-${date}-${MainViewModel.year}"
-        val databaseRef = database.getReference(dateFormat)
-//        val key =
-//        Log.d(TAG,"Key: $key")
-//        Log.d(TAG, "We are making it here ${dateFormat}")
-        databaseRef.addChildEventListener(object : ChildEventListener {
-
-            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-
-                val item = snapshot.getValue(ToDoItem::class.java)
-//                Log.d(TAG,"Snapshot: $item" )
-                val items = if (item != null) {
-                    listOf<ToDoItem>(item)
-                } else viewModel.dummyData
-
-                todoItemAdapter.todos = items
-
-
-            }
-
-            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onChildRemoved(snapshot: DataSnapshot) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-        })
-
-
-
-    }
-
-
-
 
     private fun checkLoggedInState() {
         auth = Firebase.auth

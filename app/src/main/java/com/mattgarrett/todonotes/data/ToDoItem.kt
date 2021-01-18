@@ -5,6 +5,5 @@ data class ToDoItem(
         val toDoDescription: String? = "",
         val date: String? = "",
         val isFinished: Boolean = false,
-        val timestamp: Long = 0L,
-        val numberId: Int = -1
+        val timestamp: Long = 0L
 )
