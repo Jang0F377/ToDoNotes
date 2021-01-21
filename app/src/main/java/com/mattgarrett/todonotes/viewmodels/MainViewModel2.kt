@@ -20,7 +20,7 @@ import java.util.*
 
 class MainViewModel2 : ViewModel() {
     companion object {
-        const val TAG = "MainVM2Activity"
+        private const val TAG = "MainVM2Activity"
         const val YEAR = 2021
     }
 
@@ -65,7 +65,6 @@ class MainViewModel2 : ViewModel() {
     }
 
     fun getItemsFromFirebase(adapter: ToDoItemAdapter) {
-        Log.d(TAG,Thread.currentThread().name)
         format = "ITEMS/${month}-${date}-${YEAR}"
         database = Firebase.database
         val ref =  database.getReference(format)
@@ -80,7 +79,6 @@ class MainViewModel2 : ViewModel() {
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-                TODO()
             }
 
             override fun onChildRemoved(snapshot: DataSnapshot) {
@@ -95,10 +93,6 @@ class MainViewModel2 : ViewModel() {
                 TODO()
             }
         })
-
-
-
-
     }
 
 
@@ -147,13 +141,13 @@ class MainViewModel2 : ViewModel() {
         data class Error(val message: String) : FirebasePostState()
     }
 
-    var dummyData = mutableListOf(
-            ToDoItem("Office","Need to fix program to print to SV","",false),
-            ToDoItem("Cats","Replace the Litter","",true),
-            ToDoItem("House","Need to Take out Trash and clean a little","",false),
-            ToDoItem("Office","Need to Call Someone","",false),
-            ToDoItem("Drive","Take Sarah to Work","",true)
-    )
+//    var dummyData = mutableListOf(
+//            ToDoItem("Office","Need to fix program to print to SV","",false),
+//            ToDoItem("Cats","Replace the Litter","",true),
+//            ToDoItem("House","Need to Take out Trash and clean a little","",false),
+//            ToDoItem("Office","Need to Call Someone","",false),
+//            ToDoItem("Drive","Take Sarah to Work","",true)
+//    )
 
 
 

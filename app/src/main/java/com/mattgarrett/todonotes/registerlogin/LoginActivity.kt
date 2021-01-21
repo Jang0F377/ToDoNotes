@@ -20,7 +20,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var viewModel: RegistrationViewModel
 
     companion object{
-        const val TAG = "LoginActivity"
+        private const val TAG = "LoginActivity"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

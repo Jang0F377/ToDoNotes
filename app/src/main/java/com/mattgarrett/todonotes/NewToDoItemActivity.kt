@@ -18,7 +18,7 @@ class NewToDoItemActivity : AppCompatActivity() {
 
 
     companion object {
-        const val TAG = "NewItemActivity"
+        private const val TAG = "NewItemActivity"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,21 +76,25 @@ class NewToDoItemActivity : AppCompatActivity() {
     }
 
     private fun initChecks(title: String?,description: String?): Boolean {
-        return if (title!!.isEmpty()) {
-            Snackbar.make(
-                    binding.root,
-                    "Title cannot be empty!",
-                    Snackbar.LENGTH_SHORT
-            ).show()
-            false
-        } else if (description!!.isEmpty()) {
-            Snackbar.make(
-                    binding.root,
-                    "Description cannot be empty!",
-                    Snackbar.LENGTH_SHORT
-            ).show()
-            false
-        } else true
+        return when {
+            title!!.isEmpty() -> {
+                Snackbar.make(
+                        binding.root,
+                        "Title cannot be empty!",
+                        Snackbar.LENGTH_SHORT
+                ).show()
+                false
+            }
+            description!!.isEmpty() -> {
+                Snackbar.make(
+                        binding.root,
+                        "Description cannot be empty!",
+                        Snackbar.LENGTH_SHORT
+                ).show()
+                false
+            }
+            else -> true
+        }
     }
 
     private fun checkDate(){

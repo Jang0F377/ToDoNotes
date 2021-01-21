@@ -34,11 +34,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: MainViewModel2
     private lateinit var todoItemAdapter: ToDoItemAdapter
 
-
-
-
     companion object{
-        const val TAG = "MainActivity"
+        private const val TAG = "MainActivity"
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -56,7 +53,6 @@ class MainActivity : AppCompatActivity() {
             binding.tvDayOfWeek.text = viewModel.dayOfWeek
         }
         setupRecyclerView()
-        CoroutineScope(Dispatchers.Default).launch { viewModel.getItemsFromFirebase(todoItemAdapter) }
 
 
 
@@ -69,7 +65,8 @@ class MainActivity : AppCompatActivity() {
     private fun setupRecyclerView() = binding.rvActivityMain.apply {
         todoItemAdapter = ToDoItemAdapter()
         adapter = todoItemAdapter
-        addItemDecoration(DividerItemDecoration(this@MainActivity, DividerItemDecoration.VERTICAL))
+//        addItemDecoration(DividerItemDecoration(this@MainActivity, DividerItemDecoration.VERTICAL))
+        CoroutineScope(Dispatchers.Default).launch { viewModel.getItemsFromFirebase(todoItemAdapter) }
     }
 
     private fun checkLoggedInState() {

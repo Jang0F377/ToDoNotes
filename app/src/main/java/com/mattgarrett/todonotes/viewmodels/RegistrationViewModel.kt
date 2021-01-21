@@ -12,7 +12,7 @@ import java.lang.Error
 
 class RegistrationViewModel :  ViewModel() {
     companion object {
-        const val TAG = "RegVMActivity"
+        private const val TAG = "RegVMActivity"
     }
 
     lateinit var auth: FirebaseAuth
@@ -24,7 +24,7 @@ class RegistrationViewModel :  ViewModel() {
         auth = Firebase.auth
         CoroutineScope(Dispatchers.IO).launch {
             _loginUiState.value = LoginUiState.Loading
-            delay(2500L)
+            delay(2000L)
             try {
                 auth.createUserWithEmailAndPassword(email,password)
                     .addOnCompleteListener {
@@ -48,7 +48,7 @@ class RegistrationViewModel :  ViewModel() {
         auth = Firebase.auth
         CoroutineScope(Dispatchers.IO).launch {
             _loginUiState.value = LoginUiState.Loading
-            delay(2500L)
+            delay(2000L)
             try {
                 auth.signInWithEmailAndPassword(email,password)
                     .addOnCompleteListener {

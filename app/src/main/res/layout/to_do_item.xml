@@ -3,8 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/slate_grey"
-    android:padding="6dp">
+    android:background="@drawable/rounded_corner"
+    android:padding="6dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginStart="6dp"
+    android:layout_marginEnd="6dp">
 
     <TextView
         android:id="@+id/tvItemTitle"

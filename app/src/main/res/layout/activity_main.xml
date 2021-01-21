@@ -89,11 +89,11 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="4dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginTop="2dp"
-        android:background="@color/energy_silver"
+        android:layout_marginBottom="3dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginTop="1dp"
+        android:background="#DDD7D7"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
 
