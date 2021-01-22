@@ -8,8 +8,15 @@
         android:title="+ New Item"
         app:showAsAction="always"/>
     <item
+        android:id="@+id/menuGoToDate"
+        android:title="Go To Date"
+        android:icon="@drawable/ic_calendar"
+        app:showAsAction="always"/>
+
+    <item
         android:id="@+id/menuSignOut"
         android:title="Sign Out"
         app:showAsAction="collapseActionView"/>
+
 
 </menu>

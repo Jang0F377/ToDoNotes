@@ -21,7 +21,7 @@ import java.util.*
 class MainViewModel2 : ViewModel() {
     companion object {
         private const val TAG = "MainVM2Activity"
-        const val YEAR = 2021
+        private const val YEAR = 2021
     }
 
     private val _firebasePostState = MutableStateFlow<MainViewModel2.FirebasePostState>(MainViewModel2.FirebasePostState.Empty)
@@ -79,6 +79,8 @@ class MainViewModel2 : ViewModel() {
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+                val item = snapshot.getValue(ToDoItem::class.java) as ToDoItem
+                Log.d(TAG,"$item")
             }
 
             override fun onChildRemoved(snapshot: DataSnapshot) {
@@ -98,7 +100,7 @@ class MainViewModel2 : ViewModel() {
 
     fun getCurrentDate(){
         calendar = Calendar.getInstance()
-        month = calendar.get(Calendar.MONTH) + 1
+        month = calendar.get(Calendar.MONTH)
         date = calendar.get(Calendar.DATE)
         dayOfWeek = checkDayOfWeek(calendar.get(Calendar.DAY_OF_WEEK))
         monthString = checkMonth(month!!)
@@ -106,20 +108,20 @@ class MainViewModel2 : ViewModel() {
     }
 
 
-    private fun checkMonth(month: Int): String =
+    fun checkMonth(month: Int): String =
             when (month) {
-                1 -> "January"
-                2 -> "February"
-                3 -> "March"
-                4 -> "April"
-                5 -> "May"
-                6 -> "June"
-                7 -> "July"
-                8 -> "August"
-                9 -> "September"
-                10 -> "October"
-                11 -> "November"
-                12 -> "December"
+                0 -> "January"
+                1 -> "February"
+                2 -> "March"
+                3 -> "April"
+                4 -> "May"
+                5 -> "June"
+                6 -> "July"
+                7 -> "August"
+                8 -> "September"
+                9 -> "October"
+                10 -> "November"
+                11 -> "December"
                 else -> "ERROR"
             }
     private fun checkDayOfWeek(day: Int): String =

@@ -1,5 +1,6 @@
 package com.mattgarrett.todonotes
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.DatePicker
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -33,10 +35,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainViewModel2
     private lateinit var todoItemAdapter: ToDoItemAdapter
+    private lateinit var datePicker: DatePickerDialog
 
     companion object{
         private const val TAG = "MainActivity"
     }
+
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,13 +61,10 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
-
-
     }
 
     private fun setupRecyclerView() = binding.rvActivityMain.apply {
-        todoItemAdapter = ToDoItemAdapter()
+        todoItemAdapter = ToDoItemAdapter(this@MainActivity)
         adapter = todoItemAdapter
 //        addItemDecoration(DividerItemDecoration(this@MainActivity, DividerItemDecoration.VERTICAL))
         CoroutineScope(Dispatchers.Default).launch { viewModel.getItemsFromFirebase(todoItemAdapter) }
@@ -84,6 +85,7 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.nav_menu,menu)
         return super.onCreateOptionsMenu(menu)
     }
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menuNewItem -> {
@@ -92,6 +94,9 @@ class MainActivity : AppCompatActivity() {
                     startActivity(this)
                 }
             }
+            R.id.menuGoToDate -> {
+                showDatePicker()
+            }
             R.id.menuSignOut -> {
                 auth = Firebase.auth
                 auth.signOut()
@@ -99,10 +104,22 @@ class MainActivity : AppCompatActivity() {
                     flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                     startActivity(this)
                 }
-
             }
-
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun showDatePicker() {
+        val year = 2021
+
+        datePicker = DatePickerDialog(this,DatePickerDialog.OnDateSetListener{ _, year, month, dayOfMonth ->
+            binding.tvMonth.text = viewModel.checkMonth(month)
+            binding.tvDate.text = dayOfMonth.toString()
+            Log.d(TAG,"Date Changed to ${viewModel.monthString} ${viewModel.date}, $year")
+
+        },year, viewModel.month!!,viewModel.date!!)
+        datePicker.show()
+
     }
 }
