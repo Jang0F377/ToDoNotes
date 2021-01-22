@@ -64,14 +64,16 @@ class MainViewModel2 : ViewModel() {
         }
     }
 
-    fun getItemsFromFirebase(adapter: ToDoItemAdapter) {
+    fun getItemsFromFirebase(adapter: ToDoItemAdapter, month: Int, date: Int) {
         format = "ITEMS/${month}-${date}-${YEAR}"
         database = Firebase.database
+        Log.d(TAG, format)
         val ref =  database.getReference(format)
         ref.addChildEventListener( object : ChildEventListener {
             val todoList = mutableListOf<ToDoItem>()
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val item = snapshot.getValue(ToDoItem::class.java) as ToDoItem
+                Log.d(TAG,"$item")
 
                 todoList.add(item)
                 adapter.todos = todoList
@@ -79,8 +81,8 @@ class MainViewModel2 : ViewModel() {
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-                val item = snapshot.getValue(ToDoItem::class.java) as ToDoItem
-                Log.d(TAG,"$item")
+//                val item = snapshot.getValue(ToDoItem::class.java) as ToDoItem
+//                Log.d(TAG,"$item")
             }
 
             override fun onChildRemoved(snapshot: DataSnapshot) {

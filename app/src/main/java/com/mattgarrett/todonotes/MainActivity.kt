@@ -57,6 +57,8 @@ class MainActivity : AppCompatActivity() {
             binding.tvDayOfWeek.text = viewModel.dayOfWeek
         }
         setupRecyclerView()
+        CoroutineScope(Dispatchers.Default).launch { viewModel.getItemsFromFirebase(todoItemAdapter,viewModel.month!! + 1,viewModel.date!!) }
+
 
 
 
@@ -67,7 +69,6 @@ class MainActivity : AppCompatActivity() {
         todoItemAdapter = ToDoItemAdapter(this@MainActivity)
         adapter = todoItemAdapter
 //        addItemDecoration(DividerItemDecoration(this@MainActivity, DividerItemDecoration.VERTICAL))
-        CoroutineScope(Dispatchers.Default).launch { viewModel.getItemsFromFirebase(todoItemAdapter) }
     }
 
     private fun checkLoggedInState() {
@@ -113,12 +114,13 @@ class MainActivity : AppCompatActivity() {
     private fun showDatePicker() {
         val year = 2021
 
-        datePicker = DatePickerDialog(this,DatePickerDialog.OnDateSetListener{ _, year, month, dayOfMonth ->
+        datePicker = DatePickerDialog(this, { _, year, month, dayOfMonth ->
             binding.tvMonth.text = viewModel.checkMonth(month)
             binding.tvDate.text = dayOfMonth.toString()
-            Log.d(TAG,"Date Changed to ${viewModel.monthString} ${viewModel.date}, $year")
+            Log.d(TAG,"Date Changed to ${viewModel.checkMonth(month)} ${dayOfMonth}, $year")
+            viewModel.getItemsFromFirebase(todoItemAdapter,month +1,dayOfMonth)
 
-        },year, viewModel.month!!,viewModel.date!!)
+        },year, viewModel.month!! ,viewModel.date!!)
         datePicker.show()
 
     }

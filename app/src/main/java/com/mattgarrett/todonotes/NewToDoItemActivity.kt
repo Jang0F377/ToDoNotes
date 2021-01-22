@@ -110,7 +110,7 @@ class NewToDoItemActivity : AppCompatActivity() {
         val numPickerMonth = binding.numPickerMonth.apply {
             minValue = 1
             maxValue = 12
-            value = month
+            value = month + 1
         }
         binding.numPickerDay.apply {
             minValue = 1
