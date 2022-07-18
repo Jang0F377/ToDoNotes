@@ -12,6 +12,7 @@ import android.widget.DatePicker
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
@@ -113,14 +114,18 @@ class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.N)
     private fun showDatePicker() {
         val year = 2021
-
         datePicker = DatePickerDialog(this, { _, year, month, dayOfMonth ->
             binding.tvMonth.text = viewModel.checkMonth(month)
             binding.tvDate.text = dayOfMonth.toString()
             Log.d(TAG,"Date Changed to ${viewModel.checkMonth(month)} ${dayOfMonth}, $year")
-            viewModel.getItemsFromFirebase(todoItemAdapter,month +1,dayOfMonth)
+            CoroutineScope(Dispatchers.IO).launch {
+                viewModel.getItemsFromFirebase(todoItemAdapter,month +1,dayOfMonth)
+                Log.d(TAG,"Thread : " + Thread.currentThread().name)
+            }
 
-        },year, viewModel.month!! ,viewModel.date!!)
+        },year, viewModel.month!! ,viewModel.date!!).apply {
+            title = "Go To Date.."
+        }
         datePicker.show()
 
     }

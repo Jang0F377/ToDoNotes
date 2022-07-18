@@ -12,6 +12,7 @@ import com.mattgarrett.todonotes.MainActivity
 import com.mattgarrett.todonotes.R
 import com.mattgarrett.todonotes.databinding.ActivityLoginBinding
 import com.mattgarrett.todonotes.viewmodels.RegistrationViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 
 class LoginActivity : AppCompatActivity() {
@@ -51,9 +52,10 @@ class LoginActivity : AppCompatActivity() {
                         Snackbar.make(
                             binding.root,
                             "Welcome Back to the Guild",
-                            Snackbar.LENGTH_LONG
+                            Snackbar.LENGTH_SHORT
                         ).show()
                         binding.progressBarLogin.isVisible = false
+                        delay(1200L)
                         Intent(this@LoginActivity, MainActivity::class.java).apply {
                             flags = Intent.FLAG_ACTIVITY_NEW_TASK.or(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                             startActivity(this)
@@ -63,8 +65,9 @@ class LoginActivity : AppCompatActivity() {
                         Snackbar.make(
                             binding.root,
                             "Error Occurred! ${it.message}",
-                            Snackbar.LENGTH_LONG
+                            Snackbar.LENGTH_SHORT
                         ).show()
+                        delay(1200L)
                         binding.progressBarLogin.isVisible = false
 
                     }

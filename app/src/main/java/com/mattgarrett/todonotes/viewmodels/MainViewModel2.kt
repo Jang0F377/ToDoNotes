@@ -21,7 +21,7 @@ import java.util.*
 class MainViewModel2 : ViewModel() {
     companion object {
         private const val TAG = "MainVM2Activity"
-        private const val YEAR = 2021
+        private const val YEAR = 2022
     }
 
     private val _firebasePostState = MutableStateFlow<MainViewModel2.FirebasePostState>(MainViewModel2.FirebasePostState.Empty)
@@ -68,33 +68,32 @@ class MainViewModel2 : ViewModel() {
         format = "ITEMS/${month}-${date}-${YEAR}"
         database = Firebase.database
         Log.d(TAG, format)
-        val ref =  database.getReference(format)
+        val ref =  database.reference.child(format)
         ref.addChildEventListener( object : ChildEventListener {
             val todoList = mutableListOf<ToDoItem>()
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                
                 val item = snapshot.getValue(ToDoItem::class.java) as ToDoItem
                 Log.d(TAG,"$item")
-
                 todoList.add(item)
                 adapter.todos = todoList
 
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-//                val item = snapshot.getValue(ToDoItem::class.java) as ToDoItem
-//                Log.d(TAG,"$item")
+
             }
 
             override fun onChildRemoved(snapshot: DataSnapshot) {
-                TODO()
+
             }
 
             override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
-                TODO()
+
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO()
+
             }
         })
     }
@@ -145,13 +144,13 @@ class MainViewModel2 : ViewModel() {
         data class Error(val message: String) : FirebasePostState()
     }
 
-//    var dummyData = mutableListOf(
-//            ToDoItem("Office","Need to fix program to print to SV","",false),
-//            ToDoItem("Cats","Replace the Litter","",true),
-//            ToDoItem("House","Need to Take out Trash and clean a little","",false),
-//            ToDoItem("Office","Need to Call Someone","",false),
-//            ToDoItem("Drive","Take Sarah to Work","",true)
-//    )
+    var dummyData = mutableListOf(
+            ToDoItem("Office","Need to fix program to print to SV","",false,0L),
+            ToDoItem("Cats","Replace the Litter","",true,1L),
+            ToDoItem("House","Need to Take out Trash and clean a little","",false,2L),
+            ToDoItem("Office","Need to Call Someone","",false,3L),
+            ToDoItem("Drive","Take Sarah to Work","",true,4L)
+    )
 
 
 
